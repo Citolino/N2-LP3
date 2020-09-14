@@ -1,0 +1,117 @@
+<!DOCTYPE HTML>
+<HTML>
+
+<HEAD>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <!-- A biblioteca bundle já contem os arquivos JS do Bootstrap, Popper, e jQuery.
+    <script src="js/bootstrap.bundle.js"></script>-->
+    <title>FTT EC LP2 N1!!</title>
+    <LINK REL="stylesheet" HREF="css/bootstrap.css" />
+    <LINK REL="stylesheet" HREF="css/tab01.css" />
+    
+    <STYLE>
+ 
+    </STYLE>
+
+
+  <script>
+    function buscarCep(event, form) {
+    event.preventDefault();
+    const inputCep = form.cep;
+    if (inputCep) {
+        const cep = inputCep.value;
+        if (cep.length === 8) {
+            const URL = `https://viacep.com.br/ws/${cep}/json/`;
+            fetch(URL)
+                .then(resposta => resposta.json())
+                .then(data => mostrarResposta(data))
+                .catch(erro => console.error(erro));
+        }
+    }
+     
+}
+
+function mostrarResposta(cep) {
+      mensagem = `
+            CEP: ${cep.cep},
+            RUA: ${cep.logradouro}                    ,
+            Complemento: ${cep.complemento}                   ,
+            Bairro: ${cep.bairro}                 ,
+            Cidade ${cep.localidade}             ,
+            Estado: ${cep.uf}
+        `;
+        var lista = document.getElementById("lista");
+             
+                $("#lista").append('<li> <a><h2>Endereço</h2><p>'+mensagem+' </p> </a> </li>');
+}
+
+
+
+</script>
+<link  href="http://fonts.googleapis.com/css?
+family=Reenie+Beanie:regular" 
+rel="stylesheet"
+type="text/css">
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</HEAD>
+
+<BODY lang="pt-br">
+    <div class="jquery-script-clear"></div>
+</div>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <a class="navbar-brand" href="#">&#x1F981; FTT EC LP3 1B N2!!!</a>
+
+        <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
+            <div class="navbar-nav float-right text-right pr-3">
+                <a class="nav-item nav-link" href="index.html">Splash</a>
+                <a class="nav-item nav-link" href="http://www.fundacaosalvadorarena.org.br/" target="newpage">CEFSA</a>
+                <a class="nav-item nav-link" href="about.html">Sobre</a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container">
+        <h1 class="title"> <span class="icon-font">&#128161;
+        </span> VOU DESCOBRIR SEU ENDEREÇO PELO SEU CEP<span class="icon-font">&#128161;
+        </span></h1>
+        <form class="form" onsubmit="buscarCep(event, this);">
+            <div class="row">
+             
+                    <input autofocus autocomplete="off" class="data" id="cep" maxlength="8" name="cep" pattern="([\d]{8})" placeholder="Digite o CEP" required type="text">
+                    <button class="button" type="submit">Buscar CEP</button>
+            </div>
+           <div id="endereco">
+
+           </div>
+        </form>
+        <ul id="lista">
+            
+             
+          </ul>
+    </main>
+   
+
+    <nav class="navbar fixed-bottom navbar-light bg-light width-button-bar">
+        <div class="row w-100 bottom-button-bar">
+            <div class="col-sm center-txt button-selected"><b onclick='window.location="tab01feature.html"'>BUSCAR CEP<br><span class="icon-font">&#128269;</span></b>
+            </div>
+            <div class="col-sm center-txt"><b onclick='window.location="tab02feature.html"'>Feature 2<br><span class="icon-font">&#x1f4cc;</span></b>
+            </div>
+            <div class="col-sm center-txt"><b onclick='window.location="tab03feature.html"'>Feature 3<br><span class="icon-font">&#x1F4DD;</span></b>
+            </div>
+            <div class="col-sm center-txt"><b onclick='window.location="tab04feature.html"'>Feature 4<br><span class="icon-font">&#x1F981;</span></b>
+            </div>
+        </div>
+    </nav>
+</BODY>
+<!-- carga de scripts do Bootstrap, JQuery, Popper -->
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
+
+</HTML>
