@@ -44,6 +44,37 @@
         }
     </STYLE>
     <SCRIPT>
+        
+   function PrevisaoTempo(){
+
+        fetch("https://apidev.accuweather.com/currentconditions/v1/45881.json?language=pt&apikey=hoArfRosT1215")
+                .then(resposta => resposta.json())
+                .then(data => mostrarResposta(data))
+                .catch(erro => console.error(erro));
+
+        fetch("https://apidev.accuweather.com/currentconditions/v1/41492.json?language=pt&apikey=hoArfRosT1215")
+                .then(resposta => resposta.json())
+                .then(data => mostrarResposta2(data))
+                .catch(erro => console.error(erro));
+
+                      
+              
+     }   
+
+     function mostrarResposta(data){
+        $('#temperatura').html("Temp: " + data[0].Temperature.Metric.Value + " C");  
+                        $('#clima').html("Clima: " + data[0].WeatherText);  
+                        $('#icone').attr('src','https://vortex.accuweather.com/adc2010/images/slate/icons/' + data[0].WeatherIcon + '.svg');
+
+
+     }
+     function mostrarResposta2(data){
+        $('#temperatura2').html("Temp: " + data[0].Temperature.Metric.Value + " C");  
+                        $('#clima2').html("Clima: " + data[0].WeatherText);  
+                        $('#icone2').attr('src','https://vortex.accuweather.com/adc2010/images/slate/icons/' + data[0].WeatherIcon + '.svg');
+
+     }
+
 
 
 
@@ -70,25 +101,51 @@
 
     <main class="container" id="aluno">
         <hr>
-        <h1><span class="badge badge-success">Projeto do aluno!!<br>Feature 3</span></h1>
-        <p><a href="https://github.com/public-apis/public-apis" target="_apis">Lista de APIs públicas</a></p>
+            <button onclick="PrevisaoTempo()" class="btn btn-success">VER PREVISÃO DE AGORA</button>
+        <hr>
+        <div class="row col-md-12">
+            <div  class="col-6 b btn-dark" style="border-radius:10px;height:500px;">
+                <img src='' id="icone" width="120px">
+                <hr>
+                <strong>SÃO PAULO</strong>
+                <hr>
+                <span id="temperatura"></span>
+                <hr>
+                <span id="clima"></span>
+            </div>
+            <div  class="col-6 b btn-dark" style="border-radius:10px;">
+                <img src='' id="icone2" width="120px">
+                <hr>
+               
+                <strong>SÃO BERNARDO DO CAMPO</strong>
+                <hr>
+                <span id="temperatura2"></span>
+                <hr>
+                <span id="clima2"></span>
+            </div>
+
+        </div>
+        <hr>
     </main>
 
     <nav class="navbar fixed-bottom navbar-light bg-light width-button-bar">
-        <div class="row w-100 bottom-button-bar">
+        <div class="row w-100 bottom-button-bar btn-s">
             <div class="col-sm center-txt "><b onclick='window.location="tab01feature.html"'>BUSCA CEP<br><span class="icon-font">&#128269;</span></b>
             </div>
             <div class="col-sm center-txt"><b onclick='window.location="tab02feature.html"'>ULTIMOS JOGOS<br><span class="icon-font">&#9917;</span></b>
             </div>
-            <div class="col-sm center-txt button-selected"><b onclick='window.location="tab03feature.html"'>Feature 3<br><span class="icon-font">&#x1F4DD;</span></b>
+            <div class="col-sm center-txt button-selected"><b onclick='window.location="tab03feature.html"'>PREVISÃO TEMPO<br><span class="icon-font">&#127777;&#65039;</span></b>
             </div>
-            <div class="col-sm center-txt"><b onclick='window.location="tab04feature.html"'>Feature 4<br><span class="icon-font">&#x1F981;</span></b>
+            <div class="col-sm center-txt "><b onclick='window.location="tab04feature.html"'>BREAKING BAD<br><span class="icon-font">&#129514;</span></b>
             </div>
         </div>
     </nav>
 </BODY>
 <!-- carga de scripts do Bootstrap, JQuery, Popper -->
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script
+  src="https://code.jquery.com/jquery-3.3.1.min.js"
+  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+  crossorigin="anonymous"></script>  
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
 

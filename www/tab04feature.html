@@ -7,7 +7,172 @@
     <script src="js/bootstrap.bundle.js"></script>-->
     <title>FTT EC LP2 N1!!</title>
     <LINK REL="stylesheet" HREF="css/bootstrap.css" />
-    <STYLE>
+    <style>
+        * {
+          margin: 0;
+          padding: 0;
+          box-sizing: border-box;
+        }
+    
+        html,
+        body {
+          min-height: 100vh;
+        }
+    
+        body,
+        input,
+        button {
+        
+          color: #ffffff;
+        }
+    
+        body {
+          background: #000000;
+          padding: 50px 0px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+    
+        main {
+          width: 100%;
+          max-width: 900px;
+          min-height: 500px;
+          border-radius: 4px;
+    
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: space-between;
+    
+          background: #121212;
+        }
+    
+        main header {
+          background: #272727;
+          width: 100%;
+          padding: 30px 24px;
+    
+          display: flex;
+          align-items: center;
+          justify-content: center;
+    
+          box-shadow: 0px 7px 5px 0px #0e0e0e;
+        }
+    
+        main header h1 {
+          text-align: center;
+          font-size: 32px;
+          line-height: 30px;
+          font-weight: 400;
+          letter-spacing: -2px;
+        }
+    
+        main article {
+          width: calc(100% - 80px);
+          margin: 60px 40px 0px;
+          background: #1e1e1e;
+          padding: 40px 20px;
+          position: relative;
+    
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+        }
+    
+        main article>img {
+          position: absolute;
+          left: -40px;
+          top: -60px;
+          width: 120px;
+        }
+    
+        main article button {
+          background: #006400;
+          border: none;
+          padding: 30px;
+          border-radius: 4px;
+    
+          display: flex;
+          align-items: center;
+          justify-content: center;
+    
+          font-size: 16px;
+          line-height: 16px;
+    
+          transition: background 0.2s;
+        }
+    
+        main article button:hover {
+          cursor: pointer;
+          background: #006400;
+        }
+    
+        main article button:focus {
+          outline: 0;
+        }
+    
+        main article button img {
+          width: 15px;
+          margin-left: 10px;
+        }
+    
+        main article #error {
+          width: 100%;
+          margin: 20px 0;
+          padding: 20px;
+          text-align: center;
+          background: #ffffff;
+          border-radius: 4px;
+          color: #e53935;
+          font-size: 13px;
+          line-height: 13px;
+        }
+    
+        main article .joke-wrapper {
+          position: relative;
+          width: 100%;
+          margin: 30px 0px 0px;
+          padding: 24px;
+          background: #333333;
+          border-radius: 4px;
+        }
+    
+        main article .joke-wrapper span {
+          display: block;
+          position: absolute;
+          left: -10px;
+          top: -10px;
+          font-size: 120px;
+          line-height: 120px;
+        
+          color: #050505;
+        }
+    
+        #body>img {
+          width: 200px;
+          height: 200px;
+        }
+    
+        main footer {
+          width: calc(100% - 120px);
+          margin: 50px;
+        }
+    
+        main footer small a {
+          color: #e53935;
+        }
+    
+        .hidden {
+          display: none;
+        }
+    
+        @media (min-width: 900px) {
+          main article {
+            padding: 90px;
+          }
+        }
         .center-txt {
             text-align: center;
             color: black;
@@ -39,15 +204,10 @@
             font-size: 40px;   
         }
         main {
-            padding-top: 56px;
+            padding-top: 40px;
             padding-bottom: 50px;
         }
-    </STYLE>
-    <SCRIPT>
-
-
-
-    </SCRIPT>
+      </style>
 </HEAD>
 
 <BODY lang="pt-br">
@@ -68,11 +228,95 @@
         </div>
     </nav>
 
-    <main class="container" id="aluno">
-        <hr>
-        <h1><span class="badge badge-success">Projeto do aluno!!<BR>Feature 4</span></h1>
-        <p><a href="https://github.com/public-apis/public-apis" target="_apis">Lista de APIs públicas</a></p>
-    </main>
+    <main id="body">
+        <header>
+          <h1>Descubra quem você seria em Breaking Bad</h1>
+        </header>
+    
+        <article>
+          <img
+            src="./breakingbad.png"
+             width="10px">
+    
+    
+          <button onclick="getJoke();">
+            Obtenha um personagem
+    
+            <img src="https://webplayer.tegotv.com/img/loading.gif" id="loader" class="hidden">
+          </button>
+    
+          <p id="error" class="hidden"></p>
+    
+          <div class="joke-wrapper">
+           
+    
+            <p id="joke-text">Quem sou eu?</p>
+          </div>
+         <hr>
+
+          <div>
+           
+            <img src='' id="icone" width="200px">
+          
+          </div>
+        </article>
+      </main>
+      <script>
+        const loaderElement = document.querySelector("#loader");
+        const errorElement = document.querySelector("#error");
+        const jokeElement = document.querySelector("#joke-text");
+    
+        let jokeText = "";
+    
+        const fetchParams = {
+          method: "GET",
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          mode: 'cors',
+        }
+    
+        function getRandomInt(min, max) {
+          min = Math.ceil(min);
+          max = Math.floor(max);
+          return Math.floor(Math.random() * (max - min)) + min;
+        }
+    
+        function getJoke() {
+          loaderElement.classList.remove("hidden");
+          // errorElement.classList.add("hidden");
+    
+          fetch("https://www.breakingbadapi.com/api/characters", fetchParams)
+            .then((response) => {
+              return response.json();
+            })
+            .then((data) => {
+              // data.name;
+              const aleatorio = getRandomInt(1, 57);
+              const value = data.map(dt => dt.name)[aleatorio]
+    
+              jokeElement.textContent = "";
+              jokeText = document.createTextNode(value);
+    
+              jokeElement.appendChild(jokeText);
+    
+              function GFG_Fun() {
+                var img = document.getElementById('icone');
+                img.src =
+                  data.map(dt => dt.img)[aleatorio];
+              
+              }
+    
+              GFG_Fun();
+    
+              loaderElement.classList.add("hidden");
+            })
+            .catch((error) => {
+              loaderElement.classList.add("hidden");
+              // errorElement.classList.remove("hidden");
+            })
+        }
+      </script>
 
     <nav class="navbar fixed-bottom navbar-light bg-light width-button-bar">
         <div class="row w-100 bottom-button-bar">
@@ -80,9 +324,9 @@
             </div>
             <div class="col-sm center-txt"><b onclick='window.location="tab02feature.html"'>ULTIMOS JOGOS<br><span class="icon-font">&#9917;</span></b>
             </div>
-            <div class="col-sm center-txt"><b onclick='window.location="tab03feature.html"'>Feature 3<br><span class="icon-font">&#x1F4DD;</span></b>
+            <div class="col-sm center-txt "><b onclick='window.location="tab03feature.html"'>PREVISÃO TEMPO<br><span class="icon-font">&#127777;&#65039;</span></b>
             </div>
-            <div class="col-sm center-txt button-selected"><b onclick='window.location="tab04feature.html"'>Feature 4<br><span class="icon-font">&#x1F981;</span></b>
+            <div class="col-sm center-txt button-selected"><b onclick='window.location="tab04feature.html"'>BREAKING BAD<br><span class="icon-font">&#129514;</span></b>
             </div>
         </div>
     </nav>
